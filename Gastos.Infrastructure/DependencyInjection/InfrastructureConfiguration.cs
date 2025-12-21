@@ -1,4 +1,6 @@
-﻿using Gastos.Infrastructure.Context;
+﻿using Gastos.Domain.Interfaces;
+using Gastos.Infrastructure.Context;
+using Gastos.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,9 @@ public static class InfrastructureConfiguration
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddScoped<IPessoaRepository, PessoaRepository>();
+        services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+        services.AddScoped<ITransacaoRepository, TransacaoRepository>();
         return services;
     }
 }

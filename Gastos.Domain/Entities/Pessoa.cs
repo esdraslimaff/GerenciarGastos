@@ -13,10 +13,22 @@ public class Pessoa : BaseEntity
 
     public Pessoa(string nome, int idade)
     {
-        if (string.IsNullOrWhiteSpace(nome)) throw new DomainException("Nome é obrigatório.");
-        if (idade <= 0) throw new DomainException("Idade deve ser positiva.");
-
+        ValidarDados(nome, idade);
         Nome = nome;
         Idade = idade;
+    }
+
+    public void Atualizar(string nome, int idade)
+    {
+        ValidarDados(nome, idade);
+        Nome = nome;
+        Idade = idade;
+    }
+
+    private static void ValidarDados(string nome, int idade)
+    {
+        if (string.IsNullOrWhiteSpace(nome)) throw new DomainException("Nome é obrigatório.");
+
+        if (idade <= 0) throw new DomainException("Idade deve ser maior que zero.");
     }
 }

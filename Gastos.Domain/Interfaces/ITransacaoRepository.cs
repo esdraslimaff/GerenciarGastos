@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Gastos.Domain.Interfaces
 {
-    public interface IPessoaRepository : IRepository<Pessoa>
+    public interface ITransacaoRepository : IRepository<Transacao>
     {
-        Task<IEnumerable<Pessoa>> ObterTodasComTransacoesAsync();
+        Task<IEnumerable<Transacao>> ObterTodasComDetalhesAsync();
     }
 }

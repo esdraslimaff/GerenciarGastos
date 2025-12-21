@@ -10,9 +10,9 @@ namespace Gastos.Domain.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null); //faria sentido um método com filtro? Analisar depois.
+        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null);
         Task<T?> GetByIdAsync(int id);
-        Task AddAsync(T entity);
+        Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
     }

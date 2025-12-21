@@ -10,20 +10,16 @@ using System.Threading.Tasks;
 
 namespace Gastos.Infrastructure.Repositories
 {
-    public class PessoaRepository : BaseRepository<Pessoa>, IPessoaRepository
+    public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaRepository
     {
-        public PessoaRepository(MyContext context) : base(context)
-        {
+        public CategoriaRepository(MyContext context) : base(context) { }
 
-        }
-
-        public async Task<IEnumerable<Pessoa>> ObterTodasComTransacoesAsync()
+        public async Task<IEnumerable<Categoria>> ObterTodasComTransacoesAsync()
         {
-            return await _context.Pessoas
-                .Include(p => p.Transacoes)
+            return await _context.Set<Categoria>()
+                .Include(c => c.Transacoes)
                 .AsNoTracking()
                 .ToListAsync();
         }
-
     }
 }
