@@ -166,9 +166,7 @@ A containerização foi considerada, mas não implementada nesta versão inicial
 
 Com o Back-end rodando, você pode acessar a documentação interativa e testar os endpoints através do Swagger:
 
-🔗 **Swagger UI:** `[http://localhost:5000/swagger](https://localhost:7158/swagger/index.html)` (ajuste a porta conforme sua configuração local).
-
-Os endpoints estão documentados com os códigos de retorno HTTP (200, 201, 400, 401, 404) e esquemas de dados.
+🔗 **Swagger UI:** `http://localhost:5000/swagger` (ajuste a porta conforme sua configuração local).
 
 ---
 
