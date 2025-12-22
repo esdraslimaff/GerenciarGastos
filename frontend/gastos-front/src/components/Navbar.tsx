@@ -11,11 +11,14 @@ import {
     MenuItem 
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 export const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    
+    const { logout } = useAuth();
+    const navigate = useNavigate();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -23,6 +26,12 @@ export const Navbar = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
+    };
+
+    const handleLogout = () => {
+        handleCloseNavMenu(); 
+        logout();          
+        navigate('/login'); 
     };
 
     const pages = [
@@ -37,7 +46,6 @@ export const Navbar = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     
-                    {}
                     <Typography
                         variant="h6"
                         noWrap
@@ -53,10 +61,9 @@ export const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        GASTOS RESIDENCIAIS
+                        GASTOS
                     </Typography>
 
-                    {}
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -71,20 +78,12 @@ export const Navbar = () => {
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                             keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
+                            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
+                            sx={{ display: { xs: 'block', md: 'none' } }}
                         >
                             {pages.map((page) => (
                                 <MenuItem 
@@ -96,10 +95,12 @@ export const Navbar = () => {
                                     <Typography textAlign="center">{page.nome}</Typography>
                                 </MenuItem>
                             ))}
+                            <MenuItem onClick={handleLogout}>
+                                <Typography textAlign="center" color="error">Sair</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
 
-                    {}
                     <Typography
                         variant="h5"
                         noWrap
@@ -119,7 +120,6 @@ export const Navbar = () => {
                         GASTOS
                     </Typography>
 
-                    {}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
@@ -132,6 +132,21 @@ export const Navbar = () => {
                                 {page.nome}
                             </Button>
                         ))}
+                    </Box>
+
+                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <Button
+                            onClick={handleLogout}
+                            sx={{ 
+                                my: 2, 
+                                color: 'white', 
+                                display: 'block', 
+                                border: '1px solid rgba(255,255,255,0.3)',
+                                ml: 2
+                            }}
+                        >
+                            Sair
+                        </Button>
                     </Box>
 
                 </Toolbar>

@@ -39,7 +39,6 @@ export const ListaTransacoes = () => {
                             <TableCell>Categoria</TableCell>
                             <TableCell>Valor</TableCell>
                             <TableCell>Tipo</TableCell>
-                            <TableCell>Ações</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -52,9 +51,6 @@ export const ListaTransacoes = () => {
                                 <TableCell>R$ {t.valor.toFixed(2)}</TableCell>
                                 <TableCell style={{ color: t.tipo === 'Receita' ? 'green' : 'red' }}>
                                     {t.tipo}
-                                </TableCell>
-                                <TableCell>
-                                    <Button color="error" onClick={() => handleDeletar(t.id)}>Excluir</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
