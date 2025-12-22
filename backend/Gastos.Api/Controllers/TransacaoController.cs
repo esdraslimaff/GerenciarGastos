@@ -1,5 +1,6 @@
 ﻿using Gastos.Application.DTOs.Transacao;
 using Gastos.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace Gastos.Api.Controllers
             _transacaoService = transacaoService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] CreateTransacaoDTO dto)
         {
@@ -23,6 +25,7 @@ namespace Gastos.Api.Controllers
                 return Created($"/api/transacao/{transacao.Id}", transacao);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ObterTodas()
         {

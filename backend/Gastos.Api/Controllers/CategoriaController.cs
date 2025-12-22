@@ -26,6 +26,7 @@ namespace Gastos.Api.Controllers
 
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ObterTodas()
         {
@@ -33,6 +34,7 @@ namespace Gastos.Api.Controllers
             return Ok(categorias);
         }
 
+        [Authorize]
         [HttpGet("totais")]
         public async Task<IActionResult> ObterRelatorioTotais()
         {

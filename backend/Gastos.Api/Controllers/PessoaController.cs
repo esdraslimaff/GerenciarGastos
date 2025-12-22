@@ -1,6 +1,7 @@
 ﻿using Gastos.Application.DTOs.Pessoa;
 using Gastos.Application.Interfaces;
 using Gastos.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace Gastos.Api.Controllers
             _pessoaService = pessoaService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<PessoaDTO>> Post([FromBody] CreatePessoaDTO dto)
         {
@@ -25,6 +27,7 @@ namespace Gastos.Api.Controllers
             return CreatedAtAction(nameof(ObterPorId), new { id = result.Id }, result);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterPorId(int id)
         {
@@ -35,6 +38,7 @@ namespace Gastos.Api.Controllers
             return Ok(pessoa);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ObterTodas()
         {
@@ -42,6 +46,7 @@ namespace Gastos.Api.Controllers
             return Ok(pessoas);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Deletar(int id)
         {
@@ -49,6 +54,7 @@ namespace Gastos.Api.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpGet("totais")]
         public async Task<IActionResult> ObterRelatorioTotais()
         {
