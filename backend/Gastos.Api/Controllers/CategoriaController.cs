@@ -21,8 +21,8 @@ namespace Gastos.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] CreateCategoriaDTO dto)
         {
-                var categoria = await _categoriaService.CriarAsync(dto);
-                return Created($"/api/categoria/{categoria.Id}", categoria);
+            var categoria = await _categoriaService.CriarAsync(dto);
+            return Created($"/api/categoria/{categoria.Id}", categoria);
 
         }
 
