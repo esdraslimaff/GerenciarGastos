@@ -51,5 +51,21 @@ namespace Gastos.Application.Services
                 Categorias: listaResumo
             );
         }
+
+        public async Task DeletarAsync(int id)
+        {
+            var categoria = await _categoriaRepository.GetByIdAsync(id);
+            if (categoria == null)
+            {
+                throw new KeyNotFoundException("Categoria não encontrada.");
+            }
+            var possuiTransacoes = await _categoriaRepository.PossuiTransacoesVinculadasAsync(id);
+            if (possuiTransacoes)
+            {
+                throw new InvalidOperationException("Não é possível excluir esta categoria pois existem transações vinculadas a ela.");
+            }
+
+            await _categoriaRepository.DeleteAsync(categoria);
+        }
     }
 }

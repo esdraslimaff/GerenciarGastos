@@ -21,5 +21,10 @@ namespace Gastos.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<bool> PossuiTransacoesVinculadasAsync(int categoriaId)
+        {
+            return await _context.Transacoes.AnyAsync(t => t.CategoriaId == categoriaId);
+        }
     }
 }

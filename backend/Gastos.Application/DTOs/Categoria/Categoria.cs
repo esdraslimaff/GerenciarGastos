@@ -9,7 +9,7 @@ namespace Gastos.Application.DTOs.Categoria
 {
     public record CreateCategoriaDTO(string Descricao, EFinalidadeCategoria Finalidade);
     public record CategoriaDTO(int Id, string Descricao, string Finalidade);
-
+    public record UpdateCategoriaDTO(string Descricao);
     public record CategoriaResumoDTO(int Id, string Descricao, decimal TotalReceitas, decimal TotalDespesas)
     {
         public decimal Saldo => TotalReceitas - TotalDespesas;

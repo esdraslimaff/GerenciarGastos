@@ -1,5 +1,7 @@
 ﻿using Gastos.Application.Interfaces;
 using Gastos.Application.Services;
+using Gastos.Domain.Interfaces.Repositories;
+using Gastos.Domain.Interfaces.Seguranca;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ namespace Gastos.Application.DependencyInjection
             services.AddScoped<IPessoaService, PessoaService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<ITransacaoService, TransacaoService>();
+            services.AddScoped<IAuthService, AuthService>();
             return services;
         }
     }

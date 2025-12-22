@@ -12,5 +12,6 @@ namespace Gastos.Application.Interfaces
         Task<CategoriaDTO> CriarAsync(CreateCategoriaDTO dto);
         Task<IEnumerable<CategoriaDTO>> ObterTodasAsync();
         Task<RelatorioCategoriasDTO> ObterRelatorioTotaisAsync();
+        Task DeletarAsync(int id);
     }
 }

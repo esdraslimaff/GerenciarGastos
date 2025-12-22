@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gastos.Infrastructure.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20251219053906_InitialCreate")]
+    [Migration("20251221221443_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -97,10 +97,39 @@ namespace Gastos.Infrastructure.Migrations
                     b.ToTable("Transacoes");
                 });
 
+            modelBuilder.Entity("Gastos.Domain.Entities.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenhaHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
+                });
+
             modelBuilder.Entity("Gastos.Domain.Entities.Transacao", b =>
                 {
                     b.HasOne("Gastos.Domain.Entities.Categoria", "Categoria")
-                        .WithMany()
+                        .WithMany("Transacoes")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -114,6 +143,11 @@ namespace Gastos.Infrastructure.Migrations
                     b.Navigation("Categoria");
 
                     b.Navigation("Pessoa");
+                });
+
+            modelBuilder.Entity("Gastos.Domain.Entities.Categoria", b =>
+                {
+                    b.Navigation("Transacoes");
                 });
 
             modelBuilder.Entity("Gastos.Domain.Entities.Pessoa", b =>

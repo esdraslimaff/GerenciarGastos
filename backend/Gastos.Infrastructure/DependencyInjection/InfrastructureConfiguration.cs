@@ -1,4 +1,7 @@
 ﻿using Gastos.Domain.Interfaces;
+using Gastos.Domain.Interfaces.Repositories;
+using Gastos.Domain.Interfaces.Seguranca;
+using Gastos.Infrastructure.Auth;
 using Gastos.Infrastructure.Context;
 using Gastos.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +21,8 @@ public static class InfrastructureConfiguration
         services.AddScoped<IPessoaRepository, PessoaRepository>();
         services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddScoped<ITransacaoRepository, TransacaoRepository>();
+        services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+        services.AddScoped<ITokenGenerator, JwtTokenGenerator>();
         return services;
     }
 }

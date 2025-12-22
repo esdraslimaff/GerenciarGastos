@@ -1,5 +1,6 @@
 ﻿using Gastos.Application.DTOs.Categoria;
 using Gastos.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace Gastos.Api.Controllers
             _categoriaService = categoriaService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] CreateCategoriaDTO dto)
         {
@@ -37,5 +39,15 @@ namespace Gastos.Api.Controllers
             var relatorio = await _categoriaService.ObterRelatorioTotaisAsync();
             return Ok(relatorio);
         }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deletar(int id)
+        {
+            await _categoriaService.DeletarAsync(id);
+            return NoContent();           
+        }
+
+
     }
 }

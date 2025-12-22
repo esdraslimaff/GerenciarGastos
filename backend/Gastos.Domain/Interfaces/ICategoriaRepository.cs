@@ -10,5 +10,6 @@ namespace Gastos.Domain.Interfaces
     public interface ICategoriaRepository : IRepository<Categoria>
     {
         Task<IEnumerable<Categoria>> ObterTodasComTransacoesAsync();
+        Task<bool> PossuiTransacoesVinculadasAsync(int categoriaId);
     }
 }
