@@ -108,11 +108,13 @@ cd src/Gastos.Api
 
 
 2. Configure a String de Conexão no arquivo `appsettings.json`.
-3. Execute as migrações (se estiver usando EF Core):
+3. Crie as migrações ou suba as existentes. Para tal basta acessar a pasta backend\Gastos.Infrastructure e rodar:
 ```bash
+dotnet ef migrations add NomeDaMigracao
 dotnet ef database update
-
 ```
+> ⚠️ **Atenção à Porta da API:**
+> O projeto está configurado para rodar em uma porta específica. Verifique o arquivo `Properties/launchSettings.json` na API e garanta que a **baseURL** no arquivo do front-end (`frontend/src/api/axios.ts`) esteja apontando para a mesma porta (ex: `'https://localhost:7157/`
 
 
 4. Rode a aplicação:
@@ -122,13 +124,13 @@ dotnet run
 ```
 
 
-*A API estará rodando em `http://localhost:5000` (ou porta configurada).*
+*A API estará rodando*
 
 ### Front-end
 
 1. Navegue até a pasta do frontend:
 ```bash
-cd frontend
+cd frontend\gastos-front
 
 ```
 
@@ -164,7 +166,7 @@ A containerização foi considerada, mas não implementada nesta versão inicial
 
 Com o Back-end rodando, você pode acessar a documentação interativa e testar os endpoints através do Swagger:
 
-🔗 **Swagger UI:** `http://localhost:5000/swagger` (ajuste a porta conforme sua configuração local).
+🔗 **Swagger UI:** `[http://localhost:5000/swagger](https://localhost:7158/swagger/index.html)` (ajuste a porta conforme sua configuração local).
 
 Os endpoints estão documentados com os códigos de retorno HTTP (200, 201, 400, 401, 404) e esquemas de dados.
 
