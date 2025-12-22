@@ -35,7 +35,7 @@ export const Navbar = () => {
     };
 
     const pages = [
-        { nome: 'Dashboard', path: '/' },
+        { nome: 'Dashboard', path: '/dashboard' },
         { nome: 'Pessoas', path: '/pessoas' },
         { nome: 'Categorias', path: '/categorias' },
         { nome: 'Transações', path: '/transacoes' },
@@ -50,7 +50,7 @@ export const Navbar = () => {
                         variant="h6"
                         noWrap
                         component={Link}
-                        to="/"
+                        to="https://github.com/esdraslimaff/GerenciarGastos/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -61,7 +61,7 @@ export const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        GASTOS
+                        GASTOS GitHub
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -105,7 +105,7 @@ export const Navbar = () => {
                         variant="h5"
                         noWrap
                         component={Link}
-                        to="/"
+                        to="https://github.com/esdraslimaff/GerenciarGastos/"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -117,7 +117,7 @@ export const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        GASTOS
+                        GASTOS GitHub
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

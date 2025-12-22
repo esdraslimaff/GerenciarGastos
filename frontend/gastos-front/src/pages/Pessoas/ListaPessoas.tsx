@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField } from '@mui/material';
+import { 
+    Container, Typography, Button, Table, TableBody, TableCell, 
+    TableContainer, TableHead, TableRow, Paper, TextField,
+    Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle
+} from '@mui/material';
 import { pessoaService } from '../../api/pessoa.api';
 import type { CreatePessoaDTO, PessoaDTO } from '../../models/pessoa.model';
 import { toast } from 'react-toastify';
@@ -8,6 +12,8 @@ export const ListaPessoas = () => {
     const [pessoas, setPessoas] = useState<PessoaDTO[]>([]);
     const [novoNome, setNovoNome] = useState('');
     const [novaIdade, setNovaIdade] = useState('');
+    const [openDialog, setOpenDialog] = useState(false);
+    const [idParaDeletar, setIdParaDeletar] = useState<number | null>(null);
 
     useEffect(() => {
         carregar();
@@ -51,17 +57,29 @@ export const ListaPessoas = () => {
         }
     };
 
-    const handleDeletar = async (id: number) => {
-        if(confirm('Deseja excluir? Todas as transações desta pessoa serão apagadas.')) {
-            try {
-                await pessoaService.delete(id);
-                toast.success('Pessoa excluída com sucesso.');
-                carregar();
-            } catch (error) {
-                toast.error('Erro ao excluir pessoa.');
-            }
+    const abrirModalDelete = (id: number) => {
+        setIdParaDeletar(id);
+        setOpenDialog(true);
+    };
+
+    const fecharModalDelete = () => {
+        setOpenDialog(false);
+        setIdParaDeletar(null);
+    };
+
+    const confirmarExclusao = async () => {
+        if (idParaDeletar === null) return;
+
+        try {
+            await pessoaService.delete(idParaDeletar);
+            toast.success('Pessoa excluída com sucesso.');
+            carregar();
+        } catch (error) {
+            toast.error('Erro ao excluir pessoa.');
+        } finally {
+            fecharModalDelete();
         }
-    }
+    };
 
     return (
         <Container sx={{ mt: 4 }}>
@@ -108,14 +126,41 @@ export const ListaPessoas = () => {
                                 <TableCell>{p.id}</TableCell>
                                 <TableCell>{p.nome}</TableCell>
                                 <TableCell>{p.idade}</TableCell>
-                                <TableCell>
-                                    <Button color="error" onClick={() => handleDeletar(p.id)}>Excluir</Button>
+                                <TableCell>     
+                                    <Button color="error" onClick={() => abrirModalDelete(p.id)}>
+                                        Excluir
+                                    </Button>
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Dialog
+                open={openDialog}
+                onClose={fecharModalDelete}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Confirmar Exclusão"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Deseja realmente excluir esta pessoa? <br/>
+                        <strong>Atenção:</strong> Todas as transações vinculadas a ela também serão apagadas.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={fecharModalDelete} color="primary">
+                        Cancelar
+                    </Button>
+                    <Button onClick={confirmarExclusao} color="error" autoFocus>
+                        Sim, Excluir
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
         </Container>
     );
 };

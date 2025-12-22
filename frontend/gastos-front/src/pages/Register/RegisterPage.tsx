@@ -57,7 +57,7 @@ export const RegisterPage = () => {
             
             
             setTimeout(() => {
-                navigate('/'); 
+                navigate('/login'); 
             }, 2000);
 
         } catch (error) {

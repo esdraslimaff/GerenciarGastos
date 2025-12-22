@@ -24,10 +24,10 @@ export const LoginPage = () => {
         setErro('');
         try {
             await login({ email, senha });
-            navigate('/'); 
+            navigate('/dashboard'); 
         } catch (error) {
             if (error instanceof Error) {
-                setErro(error.message);
+                setErro("Dados de login inválidos. Verifique o e-mail e a senha.");
             } else {
                 setErro('Ocorreu um erro inesperado ao tentar logar.');
             }
