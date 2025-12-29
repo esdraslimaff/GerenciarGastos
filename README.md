@@ -1,5 +1,10 @@
 # 💰 Sistema de Gerenciamento de Gastos
 
+Vídeo da aplicação:
+```
+https://jam.dev/c/6997369d-fff2-429c-97ec-4441d4814607
+```
+
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 ![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -171,8 +176,3 @@ Com o Back-end rodando, você pode acessar a documentação interativa e testar 
 ---
 
 Desenvolvido para fins de estudo e portfólio. 
-
-Vídeo da aplicação:
-```
-https://jam.dev/c/6997369d-fff2-429c-97ec-4441d4814607
-```
